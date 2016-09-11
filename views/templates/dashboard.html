@@ -6,7 +6,7 @@
 		</div>
 		<div class="container-fluid sideNav-main" ng-controller="DashboardController as dashlist" ng-init="dashlist.movielist()">
 			<p>MOVIES</p>
-			<div class="movie-opt movie-list-opt" ng-repeat="movie in movielist" ng-click="dashlist.edit(movie.title)">{{movie.title}}<span class="glyphicon glyphicon-remove-sign" id="movie-remove-btn" ng-click="dashlist.delete(movie.title)"></span></div>
+			<div class="movie-opt movie-list-opt" ng-repeat="movie in movielist" ng-click="dashlist.edit(movie.title)">{{movie.title}}<span class="glyphicon glyphicon-trash" id="movie-remove-btn" ng-click="dashlist.delete(movie.title)"></span></div>
 			<div class="movie-opt movie-add-opt" ng-click="dashlist.new()"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Movie</div>
 		
 		</div>

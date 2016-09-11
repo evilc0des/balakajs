@@ -104,6 +104,17 @@ module.exports = function(upload){
         });
     });
 
+    router.post('/delete', function (req, res) {
+        Movie.remove({title: req.body.title}, function (err) {
+            
+            if(err)
+                throw err;
+            else
+                res.json({s: 'p'});
+        });
+    });         
+
+
 
     // accept one file where the name of the form field is named photho
     router.post('/poster', upload.single('file'), function(req, res){

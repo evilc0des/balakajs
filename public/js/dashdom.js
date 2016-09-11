@@ -6,12 +6,12 @@ $(document).ready(function (e) {
 
 	$('.sideNav-main').hover(function(){
 	 	$('.movie-opt').hover(function(){
-		 	console.log('here');
+		 	//console.log('here');
 
 		 	$(this).find('#movie-remove-btn').show();
 
 		}, function(){
-		 	console.log('now');
+		 	//console.log('now');
 		 	$(this).find('#movie-remove-btn').hide();
 		});
 	});

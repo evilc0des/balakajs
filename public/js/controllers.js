@@ -220,5 +220,30 @@ viewModule.controller('DashboardController', function($scope, $window, $http){
 
 	}
 
+	this.delete = function (name) {
+		
+		vex.dialog.confirm({
+		    message: 'Are you absolutely sure you want to delete this movie?',
+		    callback: function (value) {
+		        if (value) {
+		        	var sendData = {
+						title: name
+					}
+					$http.post("/admin/delete", sendData).success(function(data, status) {
+
+						if(data.s == 'p')
+							vex.dialog.alert('Successfully Deleted Movie "'+name+'" !');
+							setTimeout(function () {
+								 $window.location.href = '/admin';
+							}, 5000)
+							
+			        });
+		        } else {
+		            console.log('Chicken.')
+		        }
+		    }
+		})
+	}
+
 	
 });
