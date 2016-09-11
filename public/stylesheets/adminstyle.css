@@ -1,0 +1,123 @@
+.admin-login-header
+{
+	text-align: center;
+	font-family: 'Raleway', sans-serif;
+}
+.admin-login-form
+{
+	background-color: black;
+	border-radius: 5px;
+	padding: 20px;
+	color: white;
+}
+
+.btn-logout
+{
+	position: relative;
+	top: 10px;
+}
+
+
+#nav-dash
+{
+	width: 300px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+#nav-dash span
+{
+	position: relative;
+	top: -30px;
+	left: 60px;
+}
+#logodash
+{
+	width: 120%;
+	position: relative;
+	top: 10px;
+	
+}
+.sideNav-footer
+{
+	padding-left: 20px;
+}
+
+.hidden-sec
+{
+	display: none;
+}
+
+.uploadDiv
+{
+	text-align: center;
+}
+
+.caption-upload
+{
+	text-align: center;
+
+}
+
+.dropzone
+{
+	margin: 20px;
+	margin-left: 0px;
+	height: 200px;
+	border-color: #4d79ff;
+}
+
+.sideNav
+{
+	background-color: #2B2B2B;
+	color: white;
+}
+
+.sideNav-main
+{
+	padding-top: 40px;
+}
+
+.logout-btn
+{
+	cursor: pointer;
+}
+.movie-opt
+{
+	padding: 10px;
+}
+.movie-opt:hover
+{
+	padding: 10px;
+	border-left-style: solid;
+	border-left-width: 5px;
+	border-left-color: #cc3300;
+	cursor: pointer;
+}
+
+.landingDiv
+{
+	text-align: center;
+	padding-top: 50px;
+}
+
+.detailDiv
+{
+	padding-top: 50px;
+}
+
+.form-heading
+{
+	font-family: 'Russo One', sans-serif; 
+}
+
+#movie-remove-btn
+{
+	display: none;
+	float: right;
+}
+
+#movie-remove-btn:hover
+{
+	color: #cc3300;
+}

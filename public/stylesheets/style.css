@@ -1,0 +1,173 @@
+body {
+  margin: 0px;
+  padding-top: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: url('/images/teen.jpg') no-repeat left top;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+header
+{
+	padding-top: 20px;
+	height: 150px;
+	background: url('/images/headbg.png') no-repeat left top;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.title
+{
+	color: white;
+	font-family: 'Lato', sans-serif;
+	font-weight: 100;
+	padding:20px;
+	padding-top: 0px;
+	display: inline-block;
+
+}
+
+.title img
+{
+	width: 250px;
+}
+
+.navbar
+{
+	float: right;
+	display: inline-block;
+	padding-top: 20px;
+	margin-right: 20px;
+}
+
+.navbar li
+{
+	list-style: none;
+	display: inline-block;
+	padding-left: 30px;
+}
+
+.jumbotron
+{
+	z-index: 1000;
+	padding-top: 100px;
+}
+
+#tagline
+{
+	background-color: rgba(0,0,0,0);
+}
+
+.container-fluid
+{
+	
+	background: url('/images/bodybg.png') no-repeat left top;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+	color: white;
+	height: 650px;	
+}
+
+.jumbotron h1
+{
+	
+	font-family: 'Monoton', cursive;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.jumbotron h2
+{
+	
+	font-family: 'Anton', cursive;
+	font-size: 56px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.jumbotron h3
+{
+	font-family: 'Anton', cursive;
+	font-size: 54px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.jumbotron h4
+{
+	font-family: 'Lato', sans-serif;
+	font-weight: 100;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.playlist-div
+{
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+}
+
+.playlist-select
+{
+	font-weight: 300; 
+	display: inline-block;
+	border: 2px solid white;
+	padding-left: 0px;
+}
+
+.playlist-select li
+{
+	width: 150px;
+	height: 30px;
+	padding-top: 5px;
+	display: inline-block;
+	list-style: none;
+
+}
+.playlist-select li:hover
+{
+	font-weight: 400;
+	cursor: pointer;
+}
+.playlist-select li.active
+{
+	width: 150px;
+	height: 30px;
+	padding-top: 5px;
+	display: inline-block;
+	list-style: none;
+	background-color: white;
+	color: black;
+
+}
+.playlist-now
+{
+	
+	display: inline-block;
+	padding-top: 20px;
+	margin-right: 20px;
+}
+.playlist-now li
+{
+	list-style: none;
+	display: inline-block;
+	border: 5px solid white;
+	
+}
+.playlist-now li img
+{
+	width: 200px;
+}
+.playlist-now li img:hover
+{
+	width: 210px;
+	cursor: pointer;
+}
+
+
+a {
+  color: #00B7FF;
+}

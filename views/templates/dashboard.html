@@ -1,0 +1,217 @@
+<div class="row">
+	<div class="container-fluid sideNav col-sm-3" ng-controller="AdminController as admin">
+		<div class="container-fluid sideNav-header">
+			<div class="col-sm-7"><a id="nav-dash" href="/admin"><img src="/images/logo.png" id="logodash"></a></div>
+			<div class="col-sm-5"><br><b>ADMIN<br>DASHBOARD</b></div>
+		</div>
+		<div class="container-fluid sideNav-main" ng-controller="DashboardController as dashlist" ng-init="dashlist.movielist()">
+			<p>MOVIES</p>
+			<div class="movie-opt movie-list-opt" ng-repeat="movie in movielist" ng-click="dashlist.edit(movie.title)">{{movie.title}}<span class="glyphicon glyphicon-remove-sign" id="movie-remove-btn" ng-click="dashlist.delete(movie.title)"></span></div>
+			<div class="movie-opt movie-add-opt" ng-click="dashlist.new()"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Movie</div>
+		
+		</div>
+		<div class="sideNav-footer" >
+			<span class="logout-btn" ng-click="admin.logout()">
+				<br>
+			  	<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+			  	LOGOUT
+			</span>
+		</div>
+	</div>
+	<div class="container-fluid mainDiv col-sm-9" ng-controller="DashboardController as dash">
+		<div class="container-fluid landingDiv mainDiv-sec">
+			<img src="/images/cat_ic.jpg">
+			<h3>Add a new Movie</h3>
+			<h5>or</h5>
+			<h4>Edit an Existing One</h4>
+			<br>
+			<p>Select the proper option from the side panel.<br>Fill in the details, upload pics and List Shows.</p>
+		</div> 
+		<div class="container-fluid detailDiv mainDiv-sec hidden-sec">
+		<div class="row">
+			<h3 class="form-heading"></h3>
+		</div>
+		<br>
+		<form name="simpleform">
+			<div class="row">
+			  <div class="form-group col-sm-6">
+			    <label for="inputTitle">Title</label>
+			    <input type="text" class="form-control" id="inputTitle" placeholder="Title" ng-model="title" name="inputTitle" required>
+			  </div>
+			  <div class="form-group col-sm-3">
+			    <label for="inputCode">Code</label>
+			    <input type="text" class="form-control" id="inputCode" placeholder="Code" ng-model="code">
+			  </div>
+			  <div class="form-group col-sm-3">
+			    <label for="inputInitials">Initials</label>
+			    <input type="text" class="form-control" id="inputInitials" placeholder="Initials" ng-model="initials">
+			  </div>
+			  </div>
+			  <div class="row">
+			  <div class="form-group col-sm-6">
+			    <label for="inputTrailer">Trailer</label>
+			    <input type="text" class="form-control" id="inputTrailer" placeholder="URL" ng-model="trailer">
+			  </div>
+			  <div class="form-group col-sm-6">
+			    <label for="inputGenre">Genre</label>
+			    <input type="text" class="form-control" id="inputGenre" placeholder="Genre (separated by comma)" ng-model="genre">
+			  </div>	
+			  </div>
+			  <div class="row">
+			  <div class="form-group col-sm-6">
+			    <label for="inputSynopsis">Synopsis</label>
+			    <textarea class="form-control" id="inputSynopsis" placeholder="Synopsis" ng-model="synopsis"></textarea>
+			  </div>
+			  <div class="form-group col-sm-6">
+			    <label for="inputGenre">Cast</label>
+			    <input type="text" class="form-control" id="inputCast" placeholder="Cast (separated by comma)" ng-model="cast">
+			  </div>	
+			  </div>
+			  
+			  <button type="submit" class="btn btn-default" ng-click="dash.record()">Record</button>
+			</form>
+		</div>
+		<div class="container-fluid uploadDiv mainDiv-sec hidden-sec">
+			<div class="caption-upload col-sm-5 col-sm-offset-1"> <h3>Upload Poster</h3></div>
+			<div class="caption-upload col-sm-5"> <h3>Upload Banner</h3></div>
+			<div id="uploadPoster" class="dropzone col-sm-5 col-sm-offset-1">
+			<div class="fallback">
+			    <input name="file" type="file"/>
+			  </div>
+			</div>
+			<div id="uploadBanner" class="dropzone col-sm-5">
+			<div class="fallback">
+			    <input name="file" type="file"/>
+			  </div>
+			</div>
+			<br>
+			<br>
+			<div class="row"><p class="col-sm-4 col-sm-offset-4">Upload photos in .jpg format only.</p></div>
+			<br>
+			<button class="btn btn-default upload-btn">Done Uploading!</button>
+		</div>
+
+		<div class="container-fluid showDiv mainDiv-sec hidden-sec">
+		<form>
+		<div class="row">
+		  <div class="form-group col-sm-3">
+		    <label for="inputhh1">Time</label>
+		    <br>
+		    <input type="number" class="form-control" id="inputhh0" placeholder="HH" style="display:inline; width:100px;" ng-model="hh[0]">
+		    &nbsp;
+		    <span>:</span>
+		    <input type="number" class="form-control" id="inputmm0" placeholder="MM" style="display:inline; width:100px;" ng-model="mm[0]">
+		    &nbsp;
+		    <select style="height:30px; border-radius:4px;" id="inputap0" ng-model="ap[0]">
+		  		<option value="AM">AM</option>
+		  		<option value="PM">PM</option>
+			</select>
+		  </div>
+		  <div class="form-group col-sm-3">
+		    <label for="inputPrice">Price</label>
+		    <br>
+		    <span>Rs.</span>
+		    <input type="number" class="form-control" id="inputPrice0" placeholder="0" style="display:inline; width:100px;" ng-model="price[0]">
+
+		  </div>
+		  </div>
+		  <div class="row">
+		  <div class="form-group col-sm-3">
+
+		    <input type="number" class="form-control" id="inputhh1" placeholder="HH" style="display:inline; width:100px;" ng-model="hh[1]">
+		    &nbsp;
+		    <span>:</span>
+		    <input type="number" class="form-control" id="inputmm1" placeholder="MM" style="display:inline; width:100px;" ng-model="mm[1]">
+		    &nbsp;
+		    <select style="height:30px; border-radius:4px;" id="inputap1" ng-model="ap[1]">
+		  		<option value="AM">AM</option>
+		  		<option value="PM">PM</option>
+			</select>
+		  </div>
+		  <div class="form-group col-sm-3">
+		 
+		    <span>Rs.</span>
+		    <input type="number" class="form-control" id="inputPrice1" placeholder="0" style="display:inline; width:100px;" ng-model="price[1]">
+
+		  </div>
+		  </div>
+		  <div class="row">
+		  <div class="form-group col-sm-3">
+
+		    <input type="number" class="form-control" id="inputhh2" placeholder="HH" style="display:inline; width:100px;" ng-model="hh[2]">
+		    &nbsp;
+		    <span>:</span>
+		    <input type="number" class="form-control" id="inputmm2" placeholder="MM" style="display:inline; width:100px;" ng-model="mm[2]">
+		    &nbsp;
+		    <select style="height:30px; border-radius:4px;" id="inputap2" ng-model="ap[2]">
+		  		<option value="AM">AM</option>
+		  		<option value="PM">PM</option>
+			</select>
+		  </div>
+		  <div class="form-group col-sm-3">
+
+		    <span>Rs.</span>
+		    <input type="number" class="form-control" id="inputPrice2" placeholder="0" style="display:inline; width:100px;" ng-model="price[2]">
+		  </div>
+		  </div>
+		    <div class="row">
+		  <div class="form-group col-sm-3">
+
+		    <input type="number" class="form-control" id="inputhh3" placeholder="HH" style="display:inline; width:100px;" ng-model="hh[3]">
+		    &nbsp;
+		    <span>:</span>
+		    <input type="number" class="form-control" id="inputmm3" placeholder="MM" style="display:inline; width:100px;" ng-model="mm[3]">
+		    &nbsp;
+		    <select style="height:30px; border-radius:4px;" id="inputap3" ng-model="ap[3]">
+		  		<option value="AM">AM</option>
+		  		<option value="PM">PM</option>
+			</select>
+		  </div>
+		  <div class="form-group col-sm-3">
+
+		    <span>Rs.</span>
+		    <input type="number" class="form-control" id="inputPrice3" placeholder="0" style="display:inline; width:100px;" ng-model="price[3]">
+		  </div>
+		  </div>
+		    <div class="row">
+		  <div class="form-group col-sm-3">
+
+		    <input type="number" class="form-control" id="inputhh4" placeholder="HH" style="display:inline; width:100px;" ng-model="hh[4]">
+		    &nbsp;
+		    <span>:</span>
+		    <input type="number" class="form-control" id="inputmm4" placeholder="MM" style="display:inline; width:100px;" ng-model="mm[4]">
+		    &nbsp;
+		    <select style="height:30px; border-radius:4px;" id="inputap4" ng-model="ap[4]">
+		  		<option value="AM">AM</option>
+		  		<option value="PM">PM</option>
+			</select>
+		  </div>
+		  <div class="form-group col-sm-3">
+
+		    <span>Rs.</span>
+		    <input type="number" class="form-control" id="inputPrice4" placeholder="0" style="display:inline; width:100px;" ng-model="price[4]">
+		  </div>
+		  </div>
+		  <div class="row">
+		  
+		  	<button type="submit" class="btn btn-default" ng-click="dash.finish()">Done</button>
+		  </div>
+		</form>
+		</div>
+	</div>
+</div>
+
+<!--
+<div class="row">
+  <div class="form-group col-sm-6">
+    <label for="inputPoster">Poster</label>
+    <input type="file" id="inputPoster">
+    <p class="help-block">Upload a portrait type poster.</p>
+  </div>
+   <div class="form-group col-sm-6">
+    <label for="inputBanner">Banner</label>
+    <input type="file" id="inputBanner">
+    <p class="help-block">Upload a landscape type poster.</p>
+  </div>
+</div>
+-->

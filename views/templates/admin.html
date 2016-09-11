@@ -1,0 +1,18 @@
+<div class="admin-login-header col-sm-4 col-sm-offset-4">
+	<img src="/images/logoadmin.png"/>
+	<h1>ADMIN LOGIN</h1>
+</div>
+<form class="col-sm-4 col-sm-offset-4 admin-login-form" ng-controller="AdminController as admin">
+  <div class="form-group">
+    <label for="email">userID</label>
+    <input type="text" class="form-control" id="user" ng-model='user'>
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password</label>
+    <input type="password" class="form-control" id="pwd" ng-model='pwd'>
+  </div>
+  <div class="checkbox">
+    <label><input type="checkbox" ng-model='remember'> Keep me Logged In</label>
+  </div>
+  <button type="submit" class="btn btn-primary" ng-click="admin.login()">Login</button>
+</form>
