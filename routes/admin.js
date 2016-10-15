@@ -5,6 +5,7 @@ var request = require('request');
 const fs = require('fs');
 var Movie=require('../model/movie');
 var path = require('path');
+var async = require('async');
 
 
 module.exports = function(upload){
@@ -44,6 +45,7 @@ module.exports = function(upload){
     });
 
     router.post('/record', function(req, res){
+        console.log(req.body);
         Movie.findOne({title: req.body.oldname}, function (err, movie) {
             if(err)
                 return done(err);
@@ -60,7 +62,7 @@ module.exports = function(upload){
                     if(err){
                         throw err;
                     }
-                    console.log(savedPost);
+                    console.log("old Movie Edited",savedPost);
                     res.json({s:'p', d: savedPost._id});
                     //return done(null, savedUser);
                 });
@@ -81,7 +83,7 @@ module.exports = function(upload){
                     if(err){
                         throw err;
                     }
-                    console.log(savedPost);
+                    console.log("New Movie Added",savedPost);
                     res.json({s:'p', d: savedPost._id});
                     //return done(null, savedUser);
                 });
@@ -105,13 +107,48 @@ module.exports = function(upload){
     });
 
     router.post('/delete', function (req, res) {
-        Movie.remove({title: req.body.title}, function (err) {
-            
-            if(err)
-                throw err;
-            else
-                res.json({s: 'p'});
-        });
+
+        async.waterfall(
+            [
+
+                function(callback){
+
+                    Movie.remove({title: req.body.title}, function (err) {
+                        
+                        if(err)
+                            callback(err);
+                        else
+                            callback(null, {s: 'p'});
+                    });
+
+                },
+                function(result, callback) {
+                    var posterDir = path.resolve(__dirname, '../public/images/poster/');
+                    var posterPath =  posterDir+"/"+req.body.initials+".jpg";
+                    //console.log(newPath);
+                    fs.unlink(posterPath, function (err) {
+                        if(err)
+                            callback(err, {s:'f'});
+                    });
+                    var bannerDir = path.resolve(__dirname, '../public/images/banner/');
+                    var bannerPath =  bannerDir+"/"+req.body.title+".jpg";
+                    //console.log(newPath);
+                    fs.unlink(posterPath, function (err) {
+                        if(err)
+                            callback(err, {s:'f'});
+                        else
+                            callback(null, {s: 'p'});
+                    });
+                }
+            ],
+            function (err,result) {
+                if(err)
+                    throw err;
+                else
+                    res.json({s:'p'});
+            }
+        );
+
     });         
 
 
@@ -119,7 +156,7 @@ module.exports = function(upload){
     // accept one file where the name of the form field is named photho
     router.post('/poster', upload.single('file'), function(req, res){
 
-        //console.log(req.headers);
+        console.log(req.file);
         var data = req.file.buffer;
         var upDir = path.resolve(__dirname, '../public/images/poster/');
         var newPath =  upDir+"/"+req.headers.title+".jpg";

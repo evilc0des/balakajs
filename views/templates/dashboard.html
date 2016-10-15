@@ -1,13 +1,13 @@
-<div class="row">
+<div class="row" ng-controller="DashboardController as dash">
 	<div class="container-fluid sideNav col-sm-3" ng-controller="AdminController as admin">
 		<div class="container-fluid sideNav-header">
 			<div class="col-sm-7"><a id="nav-dash" href="/admin"><img src="/images/logo.png" id="logodash"></a></div>
 			<div class="col-sm-5"><br><b>ADMIN<br>DASHBOARD</b></div>
 		</div>
-		<div class="container-fluid sideNav-main" ng-controller="DashboardController as dashlist" ng-init="dashlist.movielist()">
+		<div class="container-fluid sideNav-main" ng-init="dash.movielist()">
 			<p>MOVIES</p>
-			<div class="movie-opt movie-list-opt" ng-repeat="movie in movielist" ng-click="dashlist.edit(movie.title)">{{movie.title}}<span class="glyphicon glyphicon-trash" id="movie-remove-btn" ng-click="dashlist.delete(movie.title)"></span></div>
-			<div class="movie-opt movie-add-opt" ng-click="dashlist.new()"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Movie</div>
+			<div class="movie-opt movie-list-opt" ng-repeat="movie in movielist" ng-click="dash.edit(movie.title)">{{movie.title}}<span class="glyphicon glyphicon-trash" id="movie-remove-btn" ng-click="dash.delete(movie.title, movie.initials)"></span></div>
+			<div class="movie-opt movie-add-opt" ng-click="dash.new()"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Movie</div>
 		
 		</div>
 		<div class="sideNav-footer" >
@@ -18,7 +18,7 @@
 			</span>
 		</div>
 	</div>
-	<div class="container-fluid mainDiv col-sm-9" ng-controller="DashboardController as dash">
+	<div class="container-fluid mainDiv col-sm-9">
 		<div class="container-fluid landingDiv mainDiv-sec">
 			<img src="/images/cat_ic.jpg">
 			<h3>Add a new Movie</h3>
@@ -40,11 +40,11 @@
 			  </div>
 			  <div class="form-group col-sm-3">
 			    <label for="inputCode">Code</label>
-			    <input type="text" class="form-control" id="inputCode" placeholder="Code" ng-model="code">
+			    <input type="text" class="form-control" id="inputCode" placeholder="Code" ng-model="code" required>
 			  </div>
 			  <div class="form-group col-sm-3">
 			    <label for="inputInitials">Initials</label>
-			    <input type="text" class="form-control" id="inputInitials" placeholder="Initials" ng-model="initials">
+			    <input type="text" class="form-control" id="inputInitials" placeholder="Initials" ng-model="initials" required>
 			  </div>
 			  </div>
 			  <div class="row">
@@ -68,7 +68,7 @@
 			  </div>	
 			  </div>
 			  
-			  <button type="submit" class="btn btn-default" ng-click="dash.record()">Record</button>
+			  <button type="submit" id="record-btn" class="btn btn-default" ng-click="dash.record()">Record</button>
 			</form>
 		</div>
 		<div class="container-fluid uploadDiv mainDiv-sec hidden-sec">

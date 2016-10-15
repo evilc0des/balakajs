@@ -1,7 +1,13 @@
 extends layout
 
 block header
+	link(href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Roboto", rel="stylesheet")
 	link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+	link(rel='stylesheet', href='/stylesheets/vendor/vex.css')
+	link(rel='stylesheet', href='/stylesheets/vendor/vex-theme-os.css')
 	link(rel='stylesheet', href='/stylesheets/style.css')
 block content
 	include templates/index.html
+	script(src='/js/vendor/vex.combined.min.js', type='text/javascript')
+	script.
+		vex.defaultOptions.className = 'vex-theme-os'

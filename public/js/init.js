@@ -1,3 +1,4 @@
 angular.module('balakaApp', [
-	'balakaApp.controllers'
+	'balakaApp.controllers',
+	'balakaApp.directives'
 	]);

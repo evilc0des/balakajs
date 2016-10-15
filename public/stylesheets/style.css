@@ -2,7 +2,7 @@ body {
   margin: 0px;
   padding-top: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: url('/images/teen.jpg') no-repeat left top;
+  background: url('/images/bg.jpg') no-repeat left top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -62,10 +62,10 @@ header
 	background-color: rgba(0,0,0,0);
 }
 
-.container-fluid
+.container-index
 {
 	
-	background: url('/images/bodybg.png') no-repeat left top;
+  background: url('/images/bodybg.png') no-repeat left top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -170,4 +170,94 @@ header
 
 a {
   color: #00B7FF;
+}
+
+.hidden-sec
+{
+	display: none;
+}
+
+.playlist-viewer
+{
+	font-family: 'Roboto', sans-serif;
+}
+
+.playlist-viewer h1
+{
+	font-family: 'Alfa Slab One', cursive;
+	display: inline-block;
+}
+
+#genre-view
+{
+	display: inline-block;
+	padding-left: 20px;
+}
+
+#synopsis-more
+{
+	font-size: 12px;
+}
+
+#synopsis-more:hover
+{
+	color:#cc3300;
+	cursor: pointer;
+}
+
+table {
+    border-collapse: collapse;
+    width: 70%;
+}
+
+#show-view td, th {
+    border-bottom: 1px solid #ffffff;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:last-child td {
+
+	border-bottom: none;
+}
+
+#tool-view {
+
+	margin-top: 40px;
+	font-size: 20px;
+}
+
+.tool-btn
+{
+	display: inline-block;
+	padding: 10px;
+	border: 1px solid #ffffff;
+	border-radius:2px;
+}
+
+.tool-btn:hover
+{
+	color: black;
+	background-color: white;
+	cursor: pointer;
+}
+
+.vex.vex-theme-os .vex-content
+{
+	width: 560px;
+	padding: 0px;
+
+	text-align: center;
+}
+
+.vex.vex-theme-os .vex-dialog-form .vex-dialog-input {
+    margin-bottom: 0em;
+    display: none;
+}
+
+.vex.vex-theme-os .vex-content .vex-dialog-buttons
+{
+	width: 95%;
+	margin-bottom: 1em;
+	display: none;
 }

@@ -1,5 +1,5 @@
 
-<div class="container-fluid container-index">
+<div class="container-fluid container-index" >
 <header>
 	<div class="title"><img src='/images/logo.png'></div>
 	<ul class="navbar">
@@ -8,25 +8,49 @@
 		<li>CONTACT</li>
 	</ul>
 </header>	
-	<div class="row">
-		<div class="jumbotron col-sm-6" id="tagline">
-			<h4>HOW ABOUT SOME</h4>
-			<h3>SHUDDH</h3>
-			<h1>DESI</h1>
-			<h2>CINEMA</h2>
-			
+<div class="row" ng-controller="PlaylistController as playCtrl" ng-init="playCtrl.playListFetch()">
+	<div class="jumbotron col-sm-6" id="tagline">
+		<h4>HOW ABOUT SOME</h4>
+		<h3>SHUDDH</h3>
+		<h1>DESI</h1>
+		<h2>CINEMA</h2>
+		
+	</div>
+	<div class="container-fluid playlist-viewer col-sm-6 hidden-sec" >
+		<h1 id="title-view">{{name}}</h1>
+		<p id="genre-view">{{genre}}</p>
+
+		<p id="cast-view"><b>CAST |&nbsp;</b>&nbsp;{{cast}}</p>
+		
+		<br>
+		<p id="synopsis-view"><i>"{{synopsis}}"</i>	</p>
+		<br>
+		<br>
+		<div id="show-view">
+			<table style="width:90%">
+			  <tr>
+			    <th>Show</th>
+			    <th width="60">Price</th> 
+			  </tr>
+			  <tr ng-repeat="show in shows">
+			    <td>{{show.t}}</td> 
+			    <td>{{show.p}}</td>
+			  </tr>
+			</table>
 		</div>
-		<div class="playlist-viewer" >
-		<div class="playlist-div col-sm-6">
-			<ul class="playlist-select">
-				<li class="active">NOW PLAYING</li>
-				<li>UPCOMING</li>
-			</ul>
-			<ul class="playlist-now">
-				<li class="playlist-item"><img src="/images/01.jpg"></li>
-				<li class="playlist-item"><img src="/images/02.jpg"></li>
-			</ul>
+		<div id="tool-view">
+			<div class="tool-btn" id="trailer-btn" ng-click="playCtrl.showTrailer()"><span class="glyphicon glyphicon-film"></span> &nbsp;  WATCH TRAILER</div>
+			<a href="https://in.bookmyshow.com/agartala/movies/{{initials}}/{{code}}"><div class="tool-btn" id="book-btn"><span class="glyphicon glyphicon-tags"></span> &nbsp;  BOOK TICKETS</div></a>
 		</div>
 	</div>
-
+	<div class="playlist-div col-sm-6">
+		<ul class="playlist-select">
+			<li class="active">NOW PLAYING</li>
+			<li>UPCOMING</li>
+		</ul>
+		<ul class="playlist-now">
+			<li class="playlist-item" playlist-item="{{movie._id}}" ng-repeat="movie in movies"><img src="/images/poster/{{movie.title}}.jpg"></li>
+			<!--<li class="playlist-item"><img src="/images/02.jpg"></li>-->
+		</ul>
+	</div>
 </div>

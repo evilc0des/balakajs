@@ -10,12 +10,43 @@ viewModule.controller('PlaylistController', function($scope, $window, $http){
 	$scope.price = '';
 
 	this.playListFetch = function () {
-		 /* body... */ 
+		console.log('here');
+		$http.get("/movielist").success(function(data, status) {
+		 	console.log(data);
+		 	if(data.s == 'p')
+		 	{
+		 		$scope.movies = data.d;
+		 	}
+		 	//console.log(this.username);
+		});		 
 	}
 
-	this.play = function (id) {
-		 /* body... */ 
-	}	
+	$scope.play = function (id) {
+		console.log(id);
+		var result = $.grep($scope.movies, function(e){ return e._id == id; });
+		console.log(result);
+		$scope.$apply(function () {
+			$scope.name = result[0].title;
+			$scope.url = result[0].trailer;
+			$scope.synopsis = result[0].synopsis;
+			$scope.code = result[0].code;
+			$scope.initials = result[0].initials;
+			if(result[0].genre)
+				$scope.genre = result[0].genre.join();
+			if(result[0].cast)
+				$scope.cast = result[0].cast.join();
+			$scope.shows = result[0].shows;
+		});
+		
+
+
+		$('body').css("background", "url('/images/banner/"+result[0].initials+".jpg') no-repeat left top");
+	}
+
+	this.showTrailer = function(id) {
+		vex.dialog.alert({ unsafeMessage: '<iframe id="youtube-embed" width="560" height="315" src="https://www.youtube.com/embed/'+$scope.url+'?autoplay=1" frameborder="0" allowfullscreen></iframe>' })
+
+	};	
 });
 
 viewModule.controller('AdminController', function($scope, $window, $http){
@@ -65,7 +96,7 @@ viewModule.controller('DashboardController', function($scope, $window, $http){
 	$scope.price = [];
 
 	this.movielist = function () {
-		 $http.get("/admin/movielist").success(function(data, status) {
+		$http.get("/admin/movielist").success(function(data, status) {
 		 	console.log(data);
 		 	if(data.s == 'p')
 		 	{
@@ -73,19 +104,22 @@ viewModule.controller('DashboardController', function($scope, $window, $http){
 		 		this.username = data.user;
 		 	}
 		 	console.log(this.username);
-		 });
+		});
 	}
 
 	this.record = function () {
 
 		$scope.cast = $scope.cast.split(",");
 		$scope.genre = $scope.genre.split(",");
+		var results = new RegExp('[\\?&]v=([^&#]*)').exec($scope.trailer);
+		if(results)
+			var trailerCode = results[1];
 		var sendData = {
 			oldname: $scope.oldname,
 			title: $scope.title, 
 			code: $scope.code,
 			initials: $scope.initials,
-			trailer: $scope.trailer,
+			trailer: trailerCode,
 			synopsis: $scope.synopsis,
 			cast: $scope.cast,
 			genre: $scope.genre
@@ -139,6 +173,8 @@ viewModule.controller('DashboardController', function($scope, $window, $http){
 		//console.log()
 		for(i = 0; i < $scope.hh.length; i++)
 		{
+			if($scope.mm[i] == "0")
+				$scope.mm[i] = "00";
 			if($scope.hh != '')
 			{
 				var time = $scope.hh[i]+":"+$scope.mm[i]+" "+$scope.ap[i];
@@ -208,7 +244,7 @@ viewModule.controller('DashboardController', function($scope, $window, $http){
 			$('.inputap'+i).val($scope.ap[i]);
 			$('.inputPrice'+i).val($scope.price[i]);
 		}
-
+		console.log("in Edit");
 		console.log(movie);
 		console.log($scope.title);
 		console.log($scope.ap);
@@ -220,14 +256,15 @@ viewModule.controller('DashboardController', function($scope, $window, $http){
 
 	}
 
-	this.delete = function (name) {
+	this.delete = function (name, init) {
 		
 		vex.dialog.confirm({
 		    message: 'Are you absolutely sure you want to delete this movie?',
 		    callback: function (value) {
 		        if (value) {
 		        	var sendData = {
-						title: name
+						title: name,
+						initials: init
 					}
 					$http.post("/admin/delete", sendData).success(function(data, status) {
 
