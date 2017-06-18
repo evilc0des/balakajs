@@ -33,7 +33,7 @@ header
 
 .title img
 {
-	width: 250px;
+	width: 20vw;
 }
 
 .navbar
@@ -71,7 +71,7 @@ header
   -o-background-size: cover;
   background-size: cover;
 	color: white;
-	height: 650px;	
+	height: 100vh;	
 }
 
 .jumbotron h1
@@ -157,17 +157,42 @@ header
 	border: 5px solid white;
 	
 }
-.playlist-now li img
-{
-	width: 200px;
-}
-.playlist-now li img:hover
-{
-	width: 210px;
-	cursor: pointer;
+@media only screen and (min-width: 1000px) {
+	.playlist-now li img
+	{
+		width: 17vw;
+		height: 50vh;
+	}
+	.playlist-now li img:hover
+	{
+		width: 20vw;
+		height: 55vh;
+		cursor: pointer;
+	}
 }
 
+@media only screen and (max-width: 1000px) {
+	.playlist-now li img
+	{
+		width: 40vw;
+		height: 32vh;
+	}
+	.playlist-now li img:hover
+	{
+		width: 20vw;
+		height: 55vh;
+		cursor: pointer;
+	}
+	.playlist-div
+	{
+		margin-top: 20px;
+	}
 
+	.playlist-viewer
+	{
+		text-align: center;
+	}
+}
 a {
   color: #00B7FF;
 }
@@ -242,9 +267,13 @@ tr:last-child td {
 	cursor: pointer;
 }
 
+.vex.vex-theme-os 
+{
+	padding-top: 100px;
+}
 .vex.vex-theme-os .vex-content
 {
-	width: 560px;
+	width: 800px;
 	padding: 0px;
 
 	text-align: center;
@@ -260,4 +289,13 @@ tr:last-child td {
 	width: 95%;
 	margin-bottom: 1em;
 	display: none;
+}
+
+footer 
+{
+	position: absolute;
+	bottom: 0px;
+	color: rgba(255,255,255,0.5);
+	text-align: right;
+	width: 97vw;
 }

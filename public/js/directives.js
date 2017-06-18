@@ -7,8 +7,8 @@ directiveModule.directive('playlistItem', function(){
 		restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
 		link: function($scope, iElm, iAttrs, controller) {
 			iElm.click(function (e) {
-			 	var secondary = $('.playlist-item').find('img').width(150).height();
-			 	var primary =$(this).find('img').width(250);
+			 	var secondary = $('.playlist-item').find('img').width(150).height('auto').height();
+			 	var primary =$(this).find('img').width(225);
 			 	console.log(primary.height());
 			 	console.log(secondary);
 			 	var secondaryHeight = 100 + (primary.height()/2)-(secondary/2);

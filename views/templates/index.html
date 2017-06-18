@@ -9,14 +9,7 @@
 	</ul>
 </header>	
 <div class="row" ng-controller="PlaylistController as playCtrl" ng-init="playCtrl.playListFetch()">
-	<div class="jumbotron col-sm-6" id="tagline">
-		<h4>HOW ABOUT SOME</h4>
-		<h3>SHUDDH</h3>
-		<h1>DESI</h1>
-		<h2>CINEMA</h2>
-		
-	</div>
-	<div class="container-fluid playlist-viewer col-sm-6 hidden-sec" >
+	<div class="container-fluid playlist-viewer col-md-6 hidden-sec" >
 		<h1 id="title-view">{{name}}</h1>
 		<p id="genre-view">{{genre}}</p>
 
@@ -43,14 +36,21 @@
 			<a href="https://in.bookmyshow.com/agartala/movies/{{initials}}/{{code}}"><div class="tool-btn" id="book-btn"><span class="glyphicon glyphicon-tags"></span> &nbsp;  BOOK TICKETS</div></a>
 		</div>
 	</div>
-	<div class="playlist-div col-sm-6">
-		<ul class="playlist-select">
-			<li class="active">NOW PLAYING</li>
-			<li>UPCOMING</li>
-		</ul>
-		<ul class="playlist-now">
-			<li class="playlist-item" playlist-item="{{movie._id}}" ng-repeat="movie in movies"><img src="/images/poster/{{movie.title}}.jpg"></li>
-			<!--<li class="playlist-item"><img src="/images/02.jpg"></li>-->
-		</ul>
+	<div class="playlist-div col-md-6 col-md-offset-{{offset}}">
+		<div>
+			<ul class="playlist-select">
+				<li class="active">NOW PLAYING</li>
+				<li>UPCOMING</li>
+			</ul>
+		</div>
+		<div>
+			<ul class="playlist-now">
+				<li class="playlist-item" playlist-item="{{movie._id}}" ng-repeat="movie in movies"><img src="/images/poster/{{movie.initials}}.jpg"></li>
+				<!--<li class="playlist-item"><img src="/images/02.jpg"></li>-->
+			</ul>
+		</div>
 	</div>
 </div>
+<footer>
+		MADE WITH <span style="color: indianred">&#10084;</span> BY <a href="http://evilcodes.in" style="text-decoration: none; color: rgba(255,255,255,0.7);"><b>Evilcodes Studio</b>
+</footer>

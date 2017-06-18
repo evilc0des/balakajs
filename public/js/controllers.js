@@ -8,6 +8,8 @@ viewModule.controller('PlaylistController', function($scope, $window, $http){
 	$scope.synopsis = '';
 	$scope.cast = '';
 	$scope.price = '';
+	$scope.offset= '3';
+	$scope.screen='md';
 
 	this.playListFetch = function () {
 		console.log('here');
@@ -26,6 +28,8 @@ viewModule.controller('PlaylistController', function($scope, $window, $http){
 		var result = $.grep($scope.movies, function(e){ return e._id == id; });
 		console.log(result);
 		$scope.$apply(function () {
+			$scope.offset= '0';
+			$scope.screen='sm';
 			$scope.name = result[0].title;
 			$scope.url = result[0].trailer;
 			$scope.synopsis = result[0].synopsis;
@@ -41,10 +45,11 @@ viewModule.controller('PlaylistController', function($scope, $window, $http){
 
 
 		$('body').css("background", "url('/images/banner/"+result[0].initials+".jpg') no-repeat left top");
+		$('body').css("background-size", "cover");
 	}
 
 	this.showTrailer = function(id) {
-		vex.dialog.alert({ unsafeMessage: '<iframe id="youtube-embed" width="560" height="315" src="https://www.youtube.com/embed/'+$scope.url+'?autoplay=1" frameborder="0" allowfullscreen></iframe>' })
+		vex.dialog.alert({ unsafeMessage: '<iframe id="youtube-embed" width="800" height="450" src="https://www.youtube.com/embed/'+$scope.url+'?autoplay=1" frameborder="0" allowfullscreen></iframe>' })
 
 	};	
 });
@@ -212,7 +217,7 @@ viewModule.controller('DashboardController', function($scope, $window, $http){
 		$scope.title = movie.title;
 		$scope.code = movie.code;
 		$scope.initials = movie.initials;
-		$scope.trailer = movie.trailer;
+		$scope.trailer = 'https://www.youtube.com/watch?v='+movie.trailer;
 		$scope.synopsis = movie.synopsis;
 		$scope.cast = movie.cast.join();
 		$scope.genre = movie.genre.join();
@@ -231,10 +236,10 @@ viewModule.controller('DashboardController', function($scope, $window, $http){
 		for(let show of movie.shows)
 		{
 			console.log(show);
-			$scope.hh.push(show.t.split(':')[0]);
-			$scope.mm.push(show.t.split(':')[1].split(' ')[0]);
-			$scope.ap.push(show.t.split(':')[1].split(' ')[1]);
-			$scope.price.push(show.p);
+			$scope.hh.push(parseInt(show.t.split(':')[0]));
+			$scope.mm.push(parseInt(show.t.split(':')[1].split(' ')[0]));
+			$scope.ap.push(parseInt(show.t.split(':')[1].split(' ')[1]));
+			$scope.price.push(parseInt(show.p));
 		}
 		var showlen = $scope.hh.length;
 		for(var i = 0; i < showlen; i++)
