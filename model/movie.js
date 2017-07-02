@@ -9,6 +9,8 @@ var movieSchema=new schema({
    trailer: String,
    genre: [String],
    cast: [String],
+   poster: schema.Types.Mixed,
+   banner: schema.Types.Mixed,
    shows:[{
    	t: String,
    	p: String

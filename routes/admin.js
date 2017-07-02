@@ -6,6 +6,12 @@ const fs = require('fs');
 var Movie=require('../model/movie');
 var path = require('path');
 var async = require('async');
+var cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: 'dksaha', 
+  api_key: '255866145114681', 
+  api_secret: '9H1T_UGw-oDE-nr40hQqIsjEviw' 
+});
 
 
 module.exports = function(upload){
@@ -108,46 +114,57 @@ module.exports = function(upload){
 
     router.post('/delete', function (req, res) {
 
-        async.waterfall(
-            [
+        var movie;
+        Movie.findOne({title: req.body.oldname}, function (err, mov) {
+            movie = mov;
 
-                function(callback){
+            async.waterfall(
+                [
 
-                    Movie.remove({title: req.body.title}, function (err) {
-                        
-                        if(err)
-                            callback(err);
-                        else
-                            callback(null, {s: 'p'});
-                    });
+                    function(callback){
 
-                },
-                function(result, callback) {
-                    var posterDir = path.resolve(__dirname, '../public/images/poster/');
-                    var posterPath =  posterDir+"/"+req.body.initials+".jpg";
-                    //console.log(newPath);
-                    fs.unlink(posterPath, function (err) {
-                        if(err)
-                            callback(err, {s:'f'});
-                    });
-                    var bannerDir = path.resolve(__dirname, '../public/images/banner/');
-                    var bannerPath =  bannerDir+"/"+req.body.title+".jpg";
-                    //console.log(newPath);
-                    fs.unlink(posterPath, function (err) {
-                        if(err)
-                            callback(err, {s:'f'});
-                        else
-                            callback(null, {s: 'p'});
-                    });
+                        Movie.remove({title: req.body.title}, function (err) {
+                            
+                            if(err)
+                                callback(err);
+                            else
+                                callback(null, {s: 'p'});
+                        });
+
+                    },
+                    function(result, callback) {
+                        /*var posterDir = path.resolve(__dirname, '../public/images/poster/');
+                        var posterPath =  posterDir+"/"+req.body.initials+".jpg";
+                        //console.log(newPath);
+                        fs.unlink(posterPath, function (err) {
+                            if(err)
+                                callback(err, {s:'f'});
+                        });
+                        var bannerDir = path.resolve(__dirname, '../public/images/banner/');
+                        var bannerPath =  bannerDir+"/"+req.body.title+".jpg";
+                        //console.log(newPath);
+                        fs.unlink(posterPath, function (err) {
+                            if(err)
+                                callback(err, {s:'f'});
+                            else
+                                callback(null, {s: 'p'});
+                        });*/
+
+                        cloudinary.uploader.destroy(movie.poster.public_id, function(result) { 
+                            console.log(result);
+                            cloudinary.uploader.destroy(movie.banner.public_id, function(result) { console.log(result); callback(null, {s: 'p'}) });
+                         });
+
+                    }
+                ],
+                function (err,result) {
+                    if(err)
+                        throw err;
+                    else
+                        res.json({s:'p'});
                 }
-            ],
-            function (err,result) {
-                if(err)
-                    throw err;
-                else
-                    res.json({s:'p'});
-            }
-        );
+            );
+        });
 
     });         
 
@@ -158,12 +175,27 @@ module.exports = function(upload){
 
         console.log(req.file);
         var data = req.file.buffer;
-        var upDir = path.resolve(__dirname, '../public/images/poster/');
-        var newPath =  upDir+"/"+req.headers.title+".jpg";
-        console.log(newPath);
-        fs.writeFile(newPath, data, function (err) {
+        //var upDir = path.resolve(__dirname, '../public/images/poster/');
+        //var newPath =  upDir+"/"+req.headers.title+".jpg";
+        cloudinary.uploader.upload_stream(function(result){
+            Movie.findOne({initials: req.headers.title}, function (err, movie) {
+                console.log(result);
+                movie.poster = result;
+                movie.markModified('poster');
+                movie.save(function(err,savedPost){
+                    if(err){
+                        throw err;
+                    }
+                    console.log("old Movie Edited",savedPost);
+                    res.json({s:'p', d: savedPost._id});
+                    //return done(null, savedUser);
+                });
+            });
+        }).end( req.file.buffer );
+        //console.log(newPath);
+        /*fs.writeFile(newPath, data, function (err) {
             res.status(204).end();
-        });
+        });*/
         
     });
 
@@ -171,12 +203,27 @@ module.exports = function(upload){
     router.post('/banner', upload.single('file'), function(req, res){
         //console.log(req.headers);
         var data = req.file.buffer;
-        var upDir = path.resolve(__dirname, '../public/images/banner/');
+        cloudinary.uploader.upload_stream(function(result){
+            Movie.findOne({initials: req.headers.title}, function (err, movie) {
+                console.log(result);
+                movie.banner = result;
+                movie.markModified('banner');
+                movie.save(function(err,savedPost){
+                    if(err){
+                        throw err;
+                    }
+                    console.log("old Movie Edited",savedPost);
+                    res.json({s:'p', d: savedPost._id});
+                    //return done(null, savedUser);
+                });
+            });
+        }).end( req.file.buffer );
+        /*var upDir = path.resolve(__dirname, '../public/images/banner/');
         var newPath =  upDir+"/"+req.headers.title+".jpg";
         console.log(newPath);
         fs.writeFile(newPath, data, function (err) {
             res.status(204).end();
-        });
+        });*/
     });
 
     return router;

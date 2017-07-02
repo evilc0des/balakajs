@@ -39,12 +39,14 @@ viewModule.controller('PlaylistController', function($scope, $window, $http){
 				$scope.genre = result[0].genre.join();
 			if(result[0].cast)
 				$scope.cast = result[0].cast.join();
+			$scope.poster = result[0].poster.url;
+			$scope.banner = result[0].banner.url;
 			$scope.shows = result[0].shows;
 		});
 		
 
 
-		$('body').css("background", "url('/images/banner/"+result[0].initials+".jpg') no-repeat left top");
+		$('body').css("background", "url('"+result[0].banner.url+"') no-repeat left top");
 		$('body').css("background-size", "cover");
 	}
 

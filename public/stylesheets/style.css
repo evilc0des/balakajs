@@ -7,6 +7,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 header
@@ -70,8 +71,14 @@ header
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  position:fixed;
 	color: white;
-	height: 100vh;	
+	height: 100vh;
+	width: 100vw;	
+}
+
+.index-content {
+	color: white;
 }
 
 .jumbotron h1
@@ -105,6 +112,7 @@ header
 }
 .playlist-div
 {
+	padding: 0;
 	text-align: center;
 	font-family: 'Lato', sans-serif;
 	font-weight: 300;
