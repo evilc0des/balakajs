@@ -182,7 +182,7 @@ viewModule.controller('DashboardController', function($scope, $window, $http){
 		{
 			if($scope.mm[i] == "0")
 				$scope.mm[i] = "00";
-			if($scope.hh != '')
+			if($scope.hh[i] != '' && $scope.hh[i] != '0')
 			{
 				var time = $scope.hh[i]+":"+$scope.mm[i]+" "+$scope.ap[i];
 				$scope.show.push({t: time, p: $scope.price[i]});				
