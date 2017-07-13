@@ -46,8 +46,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //routes
+
+var userFn = require('./routes/users');
+
 var routes = require('./routes/index');
-var users = require('./routes/users')(passport);
+var users = userFn(passport);
 var admin = require('./routes/admin')(upload);
 
 app.use('/', routes);

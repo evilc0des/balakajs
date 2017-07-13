@@ -3,10 +3,10 @@ var router = express.Router();
 //var passport = require('passport');
 
 
-module.exports=function(passport){
+module.exports=function(pass){
 
 	router.post('/login', 
-	  passport.authenticate('local-login', { failureRedirect: '/admin' }),
+	  pass.authenticate('local-login', { failureRedirect: '/admin' }),
 	  function(req, res) {
 	  	console.log(req.user);
 	  	console.log(req.body);

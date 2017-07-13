@@ -40,7 +40,7 @@ module.exports=function(passport){
             }
             if(user.password != password){
               console.log('nopass');
-              return done(null, false, req.flash('loginMessage', 'inavalid password'));
+              return done(null, false, req.flash('loginMessage', 'invalid password'));
             }
             console.log(user);
             return done(null, user);

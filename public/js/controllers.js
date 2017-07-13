@@ -18,6 +18,10 @@ viewModule.controller('PlaylistController', function($scope, $window, $http){
 		 	if(data.s == 'p')
 		 	{
 		 		$scope.movies = data.d;
+		 		if(data.d.length == 1)
+		 			$scope.offset = '4';
+		 		if(data.d.length == 3)
+		 			$scope.offset = '2'
 		 	}
 		 	//console.log(this.username);
 		});		 
@@ -182,7 +186,7 @@ viewModule.controller('DashboardController', function($scope, $window, $http){
 		{
 			if($scope.mm[i] == "0")
 				$scope.mm[i] = "00";
-			if($scope.hh[i] != '' && $scope.hh[i] != '0')
+			if($scope.hh[i] != '' && $scope.hh[i] != '0' && $scope.hh[i] != null)
 			{
 				var time = $scope.hh[i]+":"+$scope.mm[i]+" "+$scope.ap[i];
 				$scope.show.push({t: time, p: $scope.price[i]});				
